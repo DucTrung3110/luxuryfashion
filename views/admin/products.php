@@ -6,7 +6,7 @@
             <h1 class="page-title">Manage Products</h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
@@ -77,9 +77,9 @@
                                     <tr>
                                         <td><?php echo $product['id']; ?></td>
                                         <td>
-                                            <img src="<?php echo $product['image'] ? 'uploads/products/' . $product['image'] : 'https://via.placeholder.com/50x50'; ?>"
-                                                alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                                class="img-thumbnail" style="width: 50px; height: 50px;">
+                                            <img src="<?php echo $product['image'] ? 'uploads/products/' . $product['image'] : 'https://via.placeholder.com/50x50'; ?>" 
+                                                 alt="<?php echo htmlspecialchars($product['name']); ?>" 
+                                                 class="img-thumbnail" style="width: 50px; height: 50px;">
                                         </td>
                                         <td><?php echo htmlspecialchars($product['name']); ?></td>
                                         <td><?php echo htmlspecialchars($product['category_name']); ?></td>
@@ -90,20 +90,20 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary edit-product"
-                                                data-id="<?php echo $product['id']; ?>"
-                                                data-name="<?php echo htmlspecialchars($product['name']); ?>"
-                                                data-description="<?php echo htmlspecialchars($product['description']); ?>"
-                                                data-price="<?php echo $product['price']; ?>"
-                                                data-category-id="<?php echo $product['category_id']; ?>"
-                                                data-featured="<?php echo $product['featured']; ?>">
+                                            <button class="btn btn-sm btn-outline-primary edit-product" 
+                                                    data-id="<?php echo $product['id']; ?>"
+                                                    data-name="<?php echo htmlspecialchars($product['name']); ?>"
+                                                    data-description="<?php echo htmlspecialchars($product['description']); ?>"
+                                                    data-price="<?php echo $product['price']; ?>"
+                                                    data-category-id="<?php echo $product['category_id']; ?>"
+                                                    data-featured="<?php echo $product['featured']; ?>">
                                                 Edit
                                             </button>
                                             <form method="POST" style="display: inline;">
                                                 <input type="hidden" name="action" value="delete">
                                                 <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                        onclick="return confirm('Are you sure?')">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -171,30 +171,30 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButtons = document.querySelectorAll('.edit-product');
-        const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
-
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const name = this.getAttribute('data-name');
-                const description = this.getAttribute('data-description');
-                const price = this.getAttribute('data-price');
-                const categoryId = this.getAttribute('data-category-id');
-                const featured = this.getAttribute('data-featured');
-
-                document.getElementById('editProductId').value = id;
-                document.getElementById('editName').value = name;
-                document.getElementById('editDescription').value = description;
-                document.getElementById('editPrice').value = price;
-                document.getElementById('editCategoryId').value = categoryId;
-                document.getElementById('editFeatured').checked = featured == '1';
-
-                editModal.show();
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.edit-product');
+    const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+    
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const description = this.getAttribute('data-description');
+            const price = this.getAttribute('data-price');
+            const categoryId = this.getAttribute('data-category-id');
+            const featured = this.getAttribute('data-featured');
+            
+            document.getElementById('editProductId').value = id;
+            document.getElementById('editName').value = name;
+            document.getElementById('editDescription').value = description;
+            document.getElementById('editPrice').value = price;
+            document.getElementById('editCategoryId').value = categoryId;
+            document.getElementById('editFeatured').checked = featured == '1';
+            
+            editModal.show();
         });
     });
+});
 </script>
 
 <?php include 'views/layout/footer.php'; ?>
