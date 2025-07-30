@@ -1,0 +1,20 @@
+
+RewriteEngine On
+
+# Serve static files (CSS, JS, images) directly
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(assets|uploads)/ - [L]
+
+# Route all other requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Set proper MIME types
+<FilesMatch "\.(css)$">
+    Header set Content-Type "text/css"
+</FilesMatch>
+
+<FilesMatch "\.(js)$">
+    Header set Content-Type "application/javascript"
+</FilesMatch>
