@@ -1,27 +1,22 @@
 <?php
-class User
-{
+class User {
     private $db;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->db = Database::getInstance();
     }
 
-    public function getAll()
-    {
+    public function getAll() {
         $stmt = $this->db->query("SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC");
         return $stmt->fetchAll();
     }
 
-    public function getById($id)
-    {
+    public function getById($id) {
         $stmt = $this->db->query("SELECT * FROM users WHERE id = ?", [$id]);
         return $stmt->fetch();
     }
 
-    public function login($email, $password)
-    {
+    public function login($email, $password) {
         $stmt = $this->db->query("SELECT * FROM users WHERE email = ?", [$email]);
         $user = $stmt->fetch();
 
@@ -32,14 +27,12 @@ class User
         return false;
     }
 
-    public function emailExists($email)
-    {
+    public function emailExists($email) {
         $stmt = $this->db->query("SELECT id FROM users WHERE email = ?", [$email]);
         return $stmt->fetch() !== false;
     }
 
-    public function create($data)
-    {
+    public function create($data) {
         $sql = "INSERT INTO users (name, email, password, role, profile_image) VALUES (?, ?, ?, ?, ?)";
         $params = [
             $data['name'],
@@ -52,8 +45,7 @@ class User
         return $this->db->lastInsertId();
     }
 
-    public function update($id, $data)
-    {
+    public function update($id, $data) {
         $fields = [];
         $params = [];
 
@@ -68,16 +60,15 @@ class User
         return $stmt->rowCount() > 0;
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $stmt = $this->db->query("DELETE FROM users WHERE id = ?", [$id]);
         return $stmt->rowCount() > 0;
     }
 
-    public function getCount()
-    {
+    public function getCount() {
         $stmt = $this->db->query("SELECT COUNT(*) as count FROM users");
         $result = $stmt->fetch();
         return $result['count'];
     }
 }
+?>
