@@ -6,7 +6,7 @@
             <h1 class="page-title">Admin Dashboard</h1>
         </div>
     </div>
-
+    
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="card text-center">
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
@@ -93,27 +93,16 @@
                                         <td><?php echo htmlspecialchars($order['user_name']); ?></td>
                                         <td><?php echo formatPrice($order['total_amount']); ?></td>
                                         <td>
-                                            <span class="badge bg-<?php
-                                                                    switch ($order['status']) {
-                                                                        case 'pending':
-                                                                            echo 'warning';
-                                                                            break;
-                                                                        case 'processing':
-                                                                            echo 'info';
-                                                                            break;
-                                                                        case 'shipped':
-                                                                            echo 'primary';
-                                                                            break;
-                                                                        case 'delivered':
-                                                                            echo 'success';
-                                                                            break;
-                                                                        case 'cancelled':
-                                                                            echo 'danger';
-                                                                            break;
-                                                                        default:
-                                                                            echo 'secondary';
-                                                                    }
-                                                                    ?>">
+                                            <span class="badge bg-<?php 
+                                                switch ($order['status']) {
+                                                    case 'pending': echo 'warning'; break;
+                                                    case 'processing': echo 'info'; break;
+                                                    case 'shipped': echo 'primary'; break;
+                                                    case 'delivered': echo 'success'; break;
+                                                    case 'cancelled': echo 'danger'; break;
+                                                    default: echo 'secondary';
+                                                }
+                                            ?>">
                                                 <?php echo ucfirst($order['status']); ?>
                                             </span>
                                         </td>
