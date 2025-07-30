@@ -1,10 +1,8 @@
 <?php
 // Fix duplicate categories in featured categories
-class HomeController extends BaseController
-{
+class HomeController extends BaseController {
 
-    public function index()
-    {
+    public function index() {
         $productModel = new Product();
         $categoryModel = new Category();
         // Get featured products
@@ -32,3 +30,4 @@ class HomeController extends BaseController
         ]);
     }
 }
+?>
