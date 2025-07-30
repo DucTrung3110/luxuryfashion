@@ -6,7 +6,7 @@
             <h1 class="page-title">Order History</h1>
         </div>
     </div>
-
+    
     <?php if (empty($orders)): ?>
         <div class="row">
             <div class="col-12">
@@ -39,33 +39,22 @@
                                     <td><?php echo date('M j, Y', strtotime($order['created_at'])); ?></td>
                                     <td><?php echo formatPrice($order['total_amount']); ?></td>
                                     <td>
-                                        <span class="badge bg-<?php
-                                                                switch ($order['status']) {
-                                                                    case 'pending':
-                                                                        echo 'warning';
-                                                                        break;
-                                                                    case 'processing':
-                                                                        echo 'info';
-                                                                        break;
-                                                                    case 'shipped':
-                                                                        echo 'primary';
-                                                                        break;
-                                                                    case 'delivered':
-                                                                        echo 'success';
-                                                                        break;
-                                                                    case 'cancelled':
-                                                                        echo 'danger';
-                                                                        break;
-                                                                    default:
-                                                                        echo 'secondary';
-                                                                }
-                                                                ?>">
+                                        <span class="badge bg-<?php 
+                                            switch ($order['status']) {
+                                                case 'pending': echo 'warning'; break;
+                                                case 'processing': echo 'info'; break;
+                                                case 'shipped': echo 'primary'; break;
+                                                case 'delivered': echo 'success'; break;
+                                                case 'cancelled': echo 'danger'; break;
+                                                default: echo 'secondary';
+                                            }
+                                        ?>">
                                             <?php echo ucfirst($order['status']); ?>
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="?controller=orders&action=detail&id=<?php echo $order['id']; ?>"
-                                            class="btn btn-sm btn-outline-primary">View Details</a>
+                                        <a href="?controller=orders&action=detail&id=<?php echo $order['id']; ?>" 
+                                           class="btn btn-sm btn-outline-primary">View Details</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -86,7 +75,7 @@
             <h1 class="page-title">Order History</h1>
         </div>
     </div>
-
+    
     <?php if (empty($orders)): ?>
         <div class="row">
             <div class="col-12">
@@ -119,33 +108,22 @@
                                     <td><?php echo date('M j, Y', strtotime($order['created_at'])); ?></td>
                                     <td><?php echo formatPrice($order['total_amount']); ?></td>
                                     <td>
-                                        <span class="badge bg-<?php
-                                                                switch ($order['status']) {
-                                                                    case 'pending':
-                                                                        echo 'warning';
-                                                                        break;
-                                                                    case 'processing':
-                                                                        echo 'info';
-                                                                        break;
-                                                                    case 'shipped':
-                                                                        echo 'primary';
-                                                                        break;
-                                                                    case 'delivered':
-                                                                        echo 'success';
-                                                                        break;
-                                                                    case 'cancelled':
-                                                                        echo 'danger';
-                                                                        break;
-                                                                    default:
-                                                                        echo 'secondary';
-                                                                }
-                                                                ?>">
+                                        <span class="badge bg-<?php 
+                                            switch ($order['status']) {
+                                                case 'pending': echo 'warning'; break;
+                                                case 'processing': echo 'info'; break;
+                                                case 'shipped': echo 'primary'; break;
+                                                case 'delivered': echo 'success'; break;
+                                                case 'cancelled': echo 'danger'; break;
+                                                default: echo 'secondary';
+                                            }
+                                        ?>">
                                             <?php echo ucfirst($order['status']); ?>
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="?controller=orders&action=detail&id=<?php echo $order['id']; ?>"
-                                            class="btn btn-sm btn-outline-primary">View Details</a>
+                                        <a href="?controller=orders&action=detail&id=<?php echo $order['id']; ?>" 
+                                           class="btn btn-sm btn-outline-primary">View Details</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
