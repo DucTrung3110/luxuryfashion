@@ -50,37 +50,37 @@
 <body>
     <!-- Sidebar dọc bên trái -->
     <aside class="sidebar">
-        <div class="sidebar-text">DCM</div>
+        <div class="sidebar-text">LUXURY</div>
     </aside>
 
     <!-- Phần nội dung chính bên phải -->
     <main class="main-content">
         <!-- Header (logo + menu) -->
-        <header class="luxury-navbar">
-            <div class="luxury-brand">DCM</div>
+        <header class="luxury-navbar header">
+            <div class="luxury-brand logo">LUXURY</div>
             <nav class="nav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/?controller=home">Home</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>?controller=home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/?controller=products">Products</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>?controller=products">Products</a>
                     </li>
                     <?php if (isLoggedIn()): ?>
                         <?php if (isAdmin()): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_URL ?>/?controller=admin">
+                                <a class="nav-link" href="<?= BASE_URL ?>?controller=admin">
                                     <i class="fas fa-cog"></i> Admin
                                 </a>
                             </li>
                         <?php endif; ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/?controller=orders&action=history">Orders</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>?controller=orders&action=history">Orders</a>
                         </li>
                     <?php endif; ?>
 
                     <li class="nav-item">
-                        <a class="nav-link position-relative" href="<?= BASE_URL ?>/?controller=cart">
+                        <a class="nav-link position-relative" href="<?= BASE_URL ?>?controller=cart">
                             <i class="fas fa-shopping-bag"></i> Cart
                             <span class="cart-count" id="cartCount">
                                 <?php
@@ -101,19 +101,19 @@
                                 <i class="fas fa-user"></i> <?php echo $_SESSION['user_name']; ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/?controller=users&action=profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>?controller=users&action=profile">Profile</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/?controller=users&action=logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>?controller=users&action=logout">Logout</a></li>
                             </ul>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/?controller=users&action=login">Login</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>?controller=users&action=login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/?controller=users&action=register">Register</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>?controller=users&action=register">Register</a>
                         </li>
                     <?php endif; ?>
                 </ul>
