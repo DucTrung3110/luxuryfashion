@@ -1,15 +1,12 @@
 <?php
-class Comment
-{
+class Comment {
     private $db;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->db = Database::getInstance();
     }
 
-    public function getByProduct($productId)
-    {
+    public function getByProduct($productId) {
         $sql = "SELECT c.*, u.name as user_name FROM comments c 
                 LEFT JOIN users u ON c.user_id = u.id 
                 WHERE c.product_id = ? 
@@ -18,8 +15,7 @@ class Comment
         return $stmt->fetchAll();
     }
 
-    public function create($data)
-    {
+    public function create($data) {
         $sql = "INSERT INTO comments (product_id, user_id, comment, rating) 
                 VALUES (:product_id, :user_id, :comment, :rating)";
 
@@ -27,9 +23,9 @@ class Comment
         return $this->db->lastInsertId();
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $stmt = $this->db->query("DELETE FROM comments WHERE id = ?", [$id]);
         return $stmt->rowCount() > 0;
     }
 }
+?>
