@@ -6,7 +6,7 @@
             <h1 class="page-title">Shopping Cart</h1>
         </div>
     </div>
-
+    
     <?php if (empty($cartItems)): ?>
         <div class="row">
             <div class="col-12">
@@ -26,8 +26,8 @@
                         <div class="cart-item" data-product-id="<?php echo $item['id']; ?>">
                             <div class="row align-items-center">
                                 <div class="col-md-2">
-                                    <img src="<?php echo $item['image'] ? 'uploads/products/' . $item['image'] : 'https://via.placeholder.com/100x100/000000/FFFFFF?text=Product'; ?>"
-                                        alt="<?php echo htmlspecialchars($item['name']); ?>" class="img-fluid">
+                                    <img src="<?php echo $item['image'] ? 'uploads/products/' . $item['image'] : 'https://via.placeholder.com/100x100/000000/FFFFFF?text=Product'; ?>" 
+                                         alt="<?php echo htmlspecialchars($item['name']); ?>" class="img-fluid">
                                 </div>
                                 <div class="col-md-4">
                                     <h5><?php echo htmlspecialchars($item['name']); ?></h5>
@@ -36,8 +36,8 @@
                                 <div class="col-md-3">
                                     <div class="quantity-controls">
                                         <button class="btn btn-sm btn-outline-secondary quantity-decrease">-</button>
-                                        <input type="number" class="form-control quantity-input"
-                                            value="<?php echo $item['quantity']; ?>" min="1" max="10">
+                                        <input type="number" class="form-control quantity-input" 
+                                               value="<?php echo $item['quantity']; ?>" min="1" max="10">
                                         <button class="btn btn-sm btn-outline-secondary quantity-increase">+</button>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-
+            
             <div class="col-md-4">
                 <div class="cart-summary">
                     <h4>Order Summary</h4>
@@ -72,7 +72,7 @@
                         <strong>Total:</strong>
                         <strong id="cartTotalFinal"><?php echo formatPrice($total); ?></strong>
                     </div>
-
+                    
                     <div class="mt-3">
                         <?php if (isLoggedIn()): ?>
                             <a href="?controller=orders&action=checkout" class="btn btn-luxury w-100">Checkout</a>
