@@ -1,24 +1,20 @@
 <?php
-class AdminController extends BaseController
-{
-
-    public function __construct()
-    {
+class AdminController extends BaseController {
+    
+    public function __construct() {
         parent::__construct();
         $this->requireAdmin();
     }
-
-    public function index()
-    {
+    
+    public function index() {
         $this->dashboard();
     }
-
-    public function dashboard()
-    {
+    
+    public function dashboard() {
         $userModel = new User();
         $productModel = new Product();
         $orderModel = new Order();
-
+        
         $stats = [
             'totalUsers' => $userModel->getCount(),
             'totalProducts' => $productModel->getCount(),
@@ -26,21 +22,20 @@ class AdminController extends BaseController
             'totalRevenue' => $orderModel->getTotalRevenue(),
             'recentOrders' => $orderModel->getRecent(10)
         ];
-
+        
         $this->render('admin/dashboard', ['stats' => $stats]);
     }
-
-    public function categories()
-    {
+    
+    public function categories() {
         $categoryModel = new Category();
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $action = $_POST['action'];
-
+            
             if ($action === 'create') {
                 $name = sanitize($_POST['name']);
                 $description = sanitize($_POST['description']);
-
+                
                 if (empty($name)) {
                     $_SESSION['error'] = 'Category name is required';
                 } else {
@@ -54,7 +49,7 @@ class AdminController extends BaseController
                 $id = (int)$_POST['id'];
                 $name = sanitize($_POST['name']);
                 $description = sanitize($_POST['description']);
-
+                
                 if (empty($name)) {
                     $_SESSION['error'] = 'Category name is required';
                 } else {
@@ -70,26 +65,25 @@ class AdminController extends BaseController
                 $_SESSION['success'] = 'Category deleted successfully';
             }
         }
-
+        
         $categories = $categoryModel->getAll();
         $this->render('admin/categories', ['categories' => $categories]);
     }
-
-    public function products()
-    {
+    
+    public function products() {
         $productModel = new Product();
         $categoryModel = new Category();
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $action = $_POST['action'];
-
+            
             if ($action === 'create') {
                 $name = sanitize($_POST['name']);
                 $description = sanitize($_POST['description']);
                 $price = (float)$_POST['price'];
                 $categoryId = (int)$_POST['category_id'];
                 $featured = isset($_POST['featured']) ? 1 : 0;
-
+                
                 if (empty($name) || $price <= 0) {
                     $_SESSION['error'] = 'Name and valid price are required';
                 } else {
@@ -100,7 +94,7 @@ class AdminController extends BaseController
                         'category_id' => $categoryId,
                         'featured' => $featured
                     ];
-
+                    
                     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
                         try {
                             $data['image'] = uploadImage($_FILES['image']);
@@ -108,7 +102,7 @@ class AdminController extends BaseController
                             $_SESSION['error'] = 'Image upload failed: ' . $e->getMessage();
                         }
                     }
-
+                    
                     if (!isset($_SESSION['error'])) {
                         $productModel->create($data);
                         $_SESSION['success'] = 'Product created successfully';
@@ -121,7 +115,7 @@ class AdminController extends BaseController
                 $price = (float)$_POST['price'];
                 $categoryId = (int)$_POST['category_id'];
                 $featured = isset($_POST['featured']) ? 1 : 0;
-
+                
                 if (empty($name) || $price <= 0) {
                     $_SESSION['error'] = 'Name and valid price are required';
                 } else {
@@ -132,7 +126,7 @@ class AdminController extends BaseController
                         'category_id' => $categoryId,
                         'featured' => $featured
                     ];
-
+                    
                     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
                         try {
                             $data['image'] = uploadImage($_FILES['image']);
@@ -140,7 +134,7 @@ class AdminController extends BaseController
                             $_SESSION['error'] = 'Image upload failed: ' . $e->getMessage();
                         }
                     }
-
+                    
                     if (!isset($_SESSION['error'])) {
                         $productModel->update($id, $data);
                         $_SESSION['success'] = 'Product updated successfully';
@@ -152,7 +146,7 @@ class AdminController extends BaseController
                 $_SESSION['success'] = 'Product deleted successfully';
             }
         }
-
+        
         $products = $productModel->getAll();
         $categories = $categoryModel->getAll();
         $this->render('admin/products', [
@@ -160,18 +154,17 @@ class AdminController extends BaseController
             'categories' => $categories
         ]);
     }
-
-    public function users()
-    {
+    
+    public function users() {
         $userModel = new User();
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $action = $_POST['action'];
-
+            
             if ($action === 'update_role') {
                 $id = (int)$_POST['id'];
                 $role = sanitize($_POST['role']);
-
+                
                 if (in_array($role, ['user', 'admin'])) {
                     $userModel->update($id, ['role' => $role]);
                     $_SESSION['success'] = 'User role updated successfully';
@@ -188,22 +181,21 @@ class AdminController extends BaseController
                 }
             }
         }
-
+        
         $users = $userModel->getAll();
         $this->render('admin/users', ['users' => $users]);
     }
-
-    public function orders()
-    {
+    
+    public function orders() {
         $orderModel = new Order();
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $action = $_POST['action'];
-
+            
             if ($action === 'update_status') {
                 $id = (int)$_POST['id'];
                 $status = sanitize($_POST['status']);
-
+                
                 if (in_array($status, ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])) {
                     $orderModel->updateStatus($id, $status);
                     $_SESSION['success'] = 'Order status updated successfully';
@@ -212,8 +204,9 @@ class AdminController extends BaseController
                 }
             }
         }
-
+        
         $orders = $orderModel->getAllWithUsers();
         $this->render('admin/orders', ['orders' => $orders]);
     }
 }
+?>
