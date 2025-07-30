@@ -1,15 +1,12 @@
 <?php
-class Order
-{
+class Order {
     private $db;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->db = Database::getInstance();
     }
 
-    public function create($data)
-    {
+    public function create($data) {
         $sql = "INSERT INTO orders (user_id, total_amount, shipping_name, shipping_phone, shipping_address, payment_method, notes, status) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $params = [
@@ -26,26 +23,22 @@ class Order
         return $this->db->lastInsertId();
     }
 
-    public function addItem($orderId, $productId, $quantity, $price)
-    {
+    public function addItem($orderId, $productId, $quantity, $price) {
         $sql = "INSERT INTO order_details (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
         $this->db->query($sql, [$orderId, $productId, $quantity, $price]);
     }
 
-    public function getById($id)
-    {
+    public function getById($id) {
         $stmt = $this->db->query("SELECT * FROM orders WHERE id = ?", [$id]);
         return $stmt->fetch();
     }
 
-    public function getByUser($userId)
-    {
+    public function getByUser($userId) {
         $stmt = $this->db->query("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC", [$userId]);
         return $stmt->fetchAll();
     }
 
-    public function getOrderItems($orderId)
-    {
+    public function getOrderItems($orderId) {
         $sql = "SELECT od.*, p.name, p.image FROM order_details od 
                 LEFT JOIN products p ON od.product_id = p.id 
                 WHERE od.order_id = ?";
@@ -53,8 +46,7 @@ class Order
         return $stmt->fetchAll();
     }
 
-    public function getAllWithUsers()
-    {
+    public function getAllWithUsers() {
         $sql = "SELECT o.*, u.name as user_name, u.email as user_email FROM orders o 
                 LEFT JOIN users u ON o.user_id = u.id 
                 ORDER BY o.created_at DESC";
@@ -62,28 +54,24 @@ class Order
         return $stmt->fetchAll();
     }
 
-    public function updateStatus($id, $status)
-    {
+    public function updateStatus($id, $status) {
         $stmt = $this->db->query("UPDATE orders SET status = ? WHERE id = ?", [$status, $id]);
         return $stmt->rowCount() > 0;
     }
 
-    public function getCount()
-    {
+    public function getCount() {
         $stmt = $this->db->query("SELECT COUNT(*) as count FROM orders");
         $result = $stmt->fetch();
         return $result['count'];
     }
 
-    public function getTotalRevenue()
-    {
+    public function getTotalRevenue() {
         $stmt = $this->db->query("SELECT SUM(total_amount) as total FROM orders WHERE status != 'cancelled'");
         $result = $stmt->fetch();
         return $result['total'] ?? 0;
     }
 
-    public function getRecent($limit = 10)
-    {
+    public function getRecent($limit = 10) {
         $sql = "SELECT o.*, u.name as user_name FROM orders o 
                 LEFT JOIN users u ON o.user_id = u.id 
                 ORDER BY o.created_at DESC 
@@ -92,3 +80,4 @@ class Order
         return $stmt->fetchAll();
     }
 }
+?>
