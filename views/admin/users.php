@@ -6,7 +6,7 @@
             <h1 class="page-title">Manage Users</h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -41,17 +41,17 @@
                                         <td><?php echo htmlspecialchars($user['phone'] ?? 'N/A'); ?></td>
                                         <td><?php echo date('M j, Y', strtotime($user['created_at'])); ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary edit-user"
-                                                data-id="<?php echo $user['id']; ?>"
-                                                data-role="<?php echo $user['role']; ?>">
+                                            <button class="btn btn-sm btn-outline-primary edit-user" 
+                                                    data-id="<?php echo $user['id']; ?>"
+                                                    data-role="<?php echo $user['role']; ?>">
                                                 Edit Role
                                             </button>
                                             <?php if ($user['id'] != $_SESSION['user_id']): ?>
                                                 <form method="POST" style="display: inline;">
                                                     <input type="hidden" name="action" value="delete">
                                                     <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                            onclick="return confirm('Are you sure you want to delete this user?')">
                                                         Delete
                                                     </button>
                                                 </form>
@@ -98,22 +98,22 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButtons = document.querySelectorAll('.edit-user');
-        const editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
-
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const role = this.getAttribute('data-role');
-
-                document.getElementById('editUserId').value = id;
-                document.getElementById('editRole').value = role;
-
-                editModal.show();
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.edit-user');
+    const editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+    
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const role = this.getAttribute('data-role');
+            
+            document.getElementById('editUserId').value = id;
+            document.getElementById('editRole').value = role;
+            
+            editModal.show();
         });
     });
+});
 </script>
 
 <?php include 'views/layout/footer.php'; ?>
