@@ -1,13 +1,11 @@
 <?php
-class CartController extends BaseController
-{
-
-    public function index()
-    {
+class CartController extends BaseController {
+    
+    public function index() {
         $cartModel = new Cart();
         $cartItems = [];
         $total = 0;
-
+        
         if (isLoggedIn()) {
             $cartItems = $cartModel->getByUser($_SESSION['user_id']);
             $total = $cartModel->getTotal($_SESSION['user_id']);
@@ -31,32 +29,31 @@ class CartController extends BaseController
                 }
             }
         }
-
+        
         $this->render('cart/index', [
             'cartItems' => $cartItems,
             'total' => $total
         ]);
     }
-
-    public function add()
-    {
+    
+    public function add() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productId = (int)$_POST['product_id'];
             $quantity = (int)($_POST['quantity'] ?? 1);
-
+            
             if ($productId <= 0 || $quantity <= 0) {
                 $this->json(['success' => false, 'message' => 'Invalid product or quantity']);
                 return;
             }
-
+            
             $productModel = new Product();
             $product = $productModel->getById($productId);
-
+            
             if (!$product) {
                 $this->json(['success' => false, 'message' => 'Product not found']);
                 return;
             }
-
+            
             if (isLoggedIn()) {
                 $cartModel = new Cart();
                 $cartModel->addItem($_SESSION['user_id'], $productId, $quantity);
@@ -66,16 +63,16 @@ class CartController extends BaseController
                 if (!isset($_SESSION['cart'])) {
                     $_SESSION['cart'] = [];
                 }
-
+                
                 if (isset($_SESSION['cart'][$productId])) {
                     $_SESSION['cart'][$productId] += $quantity;
                 } else {
                     $_SESSION['cart'][$productId] = $quantity;
                 }
-
+                
                 $cartCount = array_sum($_SESSION['cart']);
             }
-
+            
             $this->json([
                 'success' => true,
                 'message' => 'Product added to cart',
@@ -83,17 +80,16 @@ class CartController extends BaseController
             ]);
         }
     }
-
-    public function update()
-    {
+    
+    public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productId = (int)$_POST['product_id'];
             $quantity = (int)$_POST['quantity'];
-
+            
             if ($quantity <= 0) {
                 return $this->remove();
             }
-
+            
             if (isLoggedIn()) {
                 $cartModel = new Cart();
                 $cartModel->updateQuantity($_SESSION['user_id'], $productId, $quantity);
@@ -102,7 +98,7 @@ class CartController extends BaseController
             } else {
                 if (isset($_SESSION['cart'][$productId])) {
                     $_SESSION['cart'][$productId] = $quantity;
-
+                    
                     // Calculate total for session cart
                     $total = 0;
                     $productModel = new Product();
@@ -115,7 +111,7 @@ class CartController extends BaseController
                     $cartCount = array_sum($_SESSION['cart']);
                 }
             }
-
+            
             $this->json([
                 'success' => true,
                 'message' => 'Cart updated',
@@ -124,12 +120,11 @@ class CartController extends BaseController
             ]);
         }
     }
-
-    public function remove()
-    {
+    
+    public function remove() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productId = (int)$_POST['product_id'];
-
+            
             if (isLoggedIn()) {
                 $cartModel = new Cart();
                 $cartModel->removeItem($_SESSION['user_id'], $productId);
@@ -139,7 +134,7 @@ class CartController extends BaseController
                 if (isset($_SESSION['cart'][$productId])) {
                     unset($_SESSION['cart'][$productId]);
                     $cartCount = array_sum($_SESSION['cart']);
-
+                    
                     // Calculate total for session cart
                     $total = 0;
                     $productModel = new Product();
@@ -151,7 +146,7 @@ class CartController extends BaseController
                     }
                 }
             }
-
+            
             $this->json([
                 'success' => true,
                 'message' => 'Product removed from cart',
@@ -160,16 +155,16 @@ class CartController extends BaseController
             ]);
         }
     }
-
-    public function clear()
-    {
+    
+    public function clear() {
         if (isLoggedIn()) {
             $cartModel = new Cart();
             $cartModel->clearCart($_SESSION['user_id']);
         } else {
             $_SESSION['cart'] = [];
         }
-
+        
         redirect('?controller=cart');
     }
 }
+?>
