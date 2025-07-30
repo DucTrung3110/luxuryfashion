@@ -6,7 +6,7 @@
             <h1 class="page-title">Manage Categories</h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
@@ -53,17 +53,17 @@
                                         <td><?php echo htmlspecialchars($category['name']); ?></td>
                                         <td><?php echo htmlspecialchars($category['description']); ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-primary edit-category"
-                                                data-id="<?php echo $category['id']; ?>"
-                                                data-name="<?php echo htmlspecialchars($category['name']); ?>"
-                                                data-description="<?php echo htmlspecialchars($category['description']); ?>">
+                                            <button class="btn btn-sm btn-outline-primary edit-category" 
+                                                    data-id="<?php echo $category['id']; ?>"
+                                                    data-name="<?php echo htmlspecialchars($category['name']); ?>"
+                                                    data-description="<?php echo htmlspecialchars($category['description']); ?>">
                                                 Edit
                                             </button>
                                             <form method="POST" style="display: inline;">
                                                 <input type="hidden" name="action" value="delete">
                                                 <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                        onclick="return confirm('Are you sure?')">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -108,24 +108,24 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButtons = document.querySelectorAll('.edit-category');
-        const editModal = new bootstrap.Modal(document.getElementById('editCategoryModal'));
-
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const name = this.getAttribute('data-name');
-                const description = this.getAttribute('data-description');
-
-                document.getElementById('editCategoryId').value = id;
-                document.getElementById('editName').value = name;
-                document.getElementById('editDescription').value = description;
-
-                editModal.show();
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.edit-category');
+    const editModal = new bootstrap.Modal(document.getElementById('editCategoryModal'));
+    
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const description = this.getAttribute('data-description');
+            
+            document.getElementById('editCategoryId').value = id;
+            document.getElementById('editName').value = name;
+            document.getElementById('editDescription').value = description;
+            
+            editModal.show();
         });
     });
+});
 </script>
 
 <?php include 'views/layout/footer.php'; ?>
