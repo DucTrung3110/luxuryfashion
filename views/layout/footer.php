@@ -7,14 +7,14 @@
         <a href="#" class="instagram-link">Go to Instagram</a>
     </div>
     <div class="follow-right">
-        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Follow us" />
+        <img src="https://images.pexels.com/photos/1894263/pexels-photo-1894263.jpeg" alt="Follow us" />
     </div>
 </section>
 
 <!-- Newsletter & Thông tin thương hiệu -->
 <section class="newsletter-section">
     <div class="newsletter-left">
-        <h2>DCM</h2>
+        <h2>LUXURY</h2>
     </div>
     <div class="newsletter-right">
         <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
