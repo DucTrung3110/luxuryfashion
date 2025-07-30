@@ -6,7 +6,7 @@
             <h1 class="page-title">Checkout</h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-8">
             <div class="card">
@@ -19,25 +19,25 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="shipping_name" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="shipping_name" name="shipping_name"
-                                        value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                                    <input type="text" class="form-control" id="shipping_name" name="shipping_name" 
+                                           value="<?php echo htmlspecialchars($user['name']); ?>" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="shipping_phone" class="form-label">Phone Number</label>
-                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_phone"
-                                        value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>" required>
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_phone" 
+                                           value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>" required>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="shipping_address" class="form-label">Address</label>
-                            <textarea class="form-control" id="shipping_address" name="shipping_address"
-                                rows="3" required><?php echo htmlspecialchars($user['address'] ?? ''); ?></textarea>
+                            <textarea class="form-control" id="shipping_address" name="shipping_address" 
+                                      rows="3" required><?php echo htmlspecialchars($user['address'] ?? ''); ?></textarea>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="payment_method" class="form-label">Payment Method</label>
                             <select class="form-select" id="payment_method" name="payment_method" required>
@@ -47,18 +47,18 @@
                                 <option value="credit_card">Credit Card</option>
                             </select>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="notes" class="form-label">Order Notes (Optional)</label>
                             <textarea class="form-control" id="notes" name="notes" rows="2"></textarea>
                         </div>
-
+                        
                         <button type="submit" class="btn btn-luxury btn-lg">Place Order</button>
                     </form>
                 </div>
             </div>
         </div>
-
+        
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
@@ -71,7 +71,7 @@
                             <span><?php echo formatPrice($item['subtotal']); ?></span>
                         </div>
                     <?php endforeach; ?>
-
+                    
                     <hr>
                     <div class="d-flex justify-content-between">
                         <span>Subtotal:</span>
@@ -101,7 +101,7 @@
             <h1 class="page-title">Checkout</h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-8">
             <div class="card">
@@ -114,25 +114,25 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="shipping_name" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="shipping_name" name="shipping_name"
-                                        value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                                    <input type="text" class="form-control" id="shipping_name" name="shipping_name" 
+                                           value="<?php echo htmlspecialchars($user['name']); ?>" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="shipping_phone" class="form-label">Phone Number</label>
-                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_phone"
-                                        value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>" required>
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_phone" 
+                                           value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>" required>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="shipping_address" class="form-label">Address</label>
-                            <textarea class="form-control" id="shipping_address" name="shipping_address"
-                                rows="3" required><?php echo htmlspecialchars($user['address'] ?? ''); ?></textarea>
+                            <textarea class="form-control" id="shipping_address" name="shipping_address" 
+                                      rows="3" required><?php echo htmlspecialchars($user['address'] ?? ''); ?></textarea>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="payment_method" class="form-label">Payment Method</label>
                             <select class="form-select" id="payment_method" name="payment_method" required>
@@ -142,18 +142,18 @@
                                 <option value="credit_card">Credit Card</option>
                             </select>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="notes" class="form-label">Order Notes (Optional)</label>
                             <textarea class="form-control" id="notes" name="notes" rows="2"></textarea>
                         </div>
-
+                        
                         <button type="submit" class="btn btn-luxury btn-lg">Place Order</button>
                     </form>
                 </div>
             </div>
         </div>
-
+        
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
@@ -166,7 +166,7 @@
                             <span><?php echo formatPrice($item['subtotal']); ?></span>
                         </div>
                     <?php endforeach; ?>
-
+                    
                     <hr>
                     <div class="d-flex justify-content-between">
                         <span>Subtotal:</span>
